@@ -7,9 +7,13 @@
 def get_avg_num(a, b):
     return (a+b)/2
 
-a = int(input("Enter value of a: "))
-b = int(input("Enter value of b: "))
+def avg_main():
+    a = int(input("Enter value of a: "))
+    b = int(input("Enter value of b: "))
 
-avg = get_avg_num(a,b)
+    avg = get_avg_num(a, b)
 
-print(f"The average of {a} and {b} is : {avg}")
+    print(f"The average of {a} and {b} is : {avg}")
+
+
+# avg_main()

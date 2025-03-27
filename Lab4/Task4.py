@@ -1,5 +1,5 @@
 
-def get_character(char):
+def get_next_character(char):
     if char.isalpha():
         char_numeric_val = ord(char)
         char_numeric_val += 1
@@ -15,6 +15,6 @@ def get_character(char):
 
 char = input("Enter the character: ")
 
-modified_char = get_character(char)
+modified_char = get_next_character(char)
 
 print(f"The the character via the function {modified_char}")
