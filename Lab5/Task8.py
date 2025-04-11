@@ -1,3 +1,4 @@
+from math import inf
 
 def calculate_letter_grade(total_mark):
     if total_mark >= 80:
@@ -47,8 +48,40 @@ def take_student_input_data():
     return all_student_data
 
 
+def get_student_statics(student_data):
+    avg_mark = 0
+    sum_mark = 0
+    student_count = len(student_data)
+    failed_std_count = 0
+    highest_mark = -inf
+    lowest_mark = inf
+
+    for student in student_data:
+        mark = student[4]
+        grade = student[5]
+        sum_mark += mark
+        if mark > highest_mark:
+            highest_mark = mark
+        if mark < lowest_mark:
+            lowest_mark = mark
+
+        if grade == 'F':
+            failed_std_count += 1
+
+    avg_mark = sum_mark / student_count
+    return (avg_mark, highest_mark, lowest_mark, failed_std_count)
+
 student_data = take_student_input_data()
 
+avg_mark, highest_mark, lowest_mark, failed_std_count = get_student_statics(student_data)
+
+student_grades = [(std[0],std[5]) for std in student_data]
+#[(1001, 'P'), (1002, 'HD'), (1003, 'F')]
+hd_grade_list = [std_id for std_id,grade in student_grades if grade == 'HD']
+
 print(student_data)
+print(f"Highest Mark: {highest_mark}, Lowest Mark: {lowest_mark}, Avg Mark: {avg_mark:.2f}")
+print(f"Failed Student Count: {failed_std_count}")
+print(f"HD Grade List: {hd_grade_list}")
 
 

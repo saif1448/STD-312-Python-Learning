@@ -1,10 +1,10 @@
 import sys
 
-def capitalize_word(word):
+def capitalize_word(word): # asd
     capitalized_word = ""
     for char in word:
         capitalized_word += char.upper()
-
+    #ASD
     return capitalized_word
 
 def capitalize_word_list_side_effect(word_list):
