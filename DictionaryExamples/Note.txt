@@ -1,0 +1,37 @@
+
+
+
+The data structures here in python can be called as Collections also
+
+Collections means they can contain data
+
+List, Tuple ----> Ordered ----> you can index them
+----> They are sequential data structure
+----> String, Range()
+
+The basic common things for the sequential data structures are
+
+1. Indexing
+2. Slicing
+3. Repetition, eg, "abc"*3 => "abcabcabc"
+4. Length: such as len([1,2,3,4,5]) => 5
+5. Membership: in operation and not in operator
+6. Iterable: as in the for loop
+
+    for var in iterable:
+        pass
+
+
+Dictionary and Set ----> They are not sequential
+1. You cannot index them in sequential
+2. You cannot slice
+3. You cannot repeat them
+4. You can see the length
+5. There are many member functions
+6. We cannot use the in operator and looping
+
+{
+    'key 1': 'value 1',
+    'key 2': 'value 2',
+    'key 3': 'value 3'
+}
