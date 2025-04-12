@@ -18,7 +18,8 @@ def is_mark_in_range(mark):
         return True
 
 def print_student_data(student_data):
-    print(f'Name: {student_data["Name"]} '
+    print( f'Name: {student_data["Name"]} '
+          f'StudentID: {student_data["ID"]} '
           f'\nQ1: {student_data["Q1"]} '
           f'\nQ2: {student_data["Q2"]} '
           f'\nFinal: {student_data["Final"]} '
@@ -32,6 +33,11 @@ def take_student_input_data():
         student_id = int(input('Student ID: '))
         if student_id <= 0:
             break
+
+        if not 1000<=student_id<=2000:
+            print("Incorrect Student ID")
+            continue
+
         name = input('Name: ')
         q1 = int(input('Q1: '))
         q2 = int(input('Q2: '))
@@ -45,6 +51,7 @@ def take_student_input_data():
         total_mark = round(total_mark)
         letter_grade = calculate_letter_grade(total_mark)
 
+        student_data['ID'] = student_id
         student_data['Name'] = name
         student_data['Q1'] = q1
         student_data['Q2'] = q2
