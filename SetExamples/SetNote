@@ -1,0 +1,37 @@
+Set and its properties
+	1. Values of set cannot be changed
+	2. items can be added or deleted into sets
+	3. Most functions of tuples and list can be used
+		1. sorted()
+		2. min(), max(), sum()
+	4. items don't have fixed order, so no indexing
+	5. Common Functions of Set:
+		1. Insertion
+			1. add()
+		2. Deletion
+			1. remove(elem) ---> if not found raise error
+			2. discard(elem) ---> remove element if found, if not found no error is being raised
+			3. pop() ---> removes and return a random element
+			4. clear() ---> removes everything in the set
+		3. Searching
+			1. in operator
+		4. Sorting
+			1. sorted() ---> set doesnt have order, it returns a sorted list in ascending order by default (it is not called via object)
+			2.
+		5. Traversing
+			1. use for loop
+		6. Merging
+			1. Can be done using *set operations
+	6. Set Operations
+		1. Union
+			1. a.union()
+			2. '|' this operator does the same
+		2. Intersection
+			1. a.intersection(b)
+			2. '&' this operator does the same
+		3. Difference
+			1. a.difference(b)
+			2. '-' this operator does the same
+		4. Symmetric Difference
+			1. a.symmetric_difference(b)
+	7. Set Comparsion
