@@ -1,0 +1,2 @@
+D:\Saif\Teaching\StudentCourseCodeExamples\STD-312\NewPythonTestProj\pythonProject1\FilesAndDirExamples\TestFile1.txt
+FilesAndDirExamples/TestFile1.txt

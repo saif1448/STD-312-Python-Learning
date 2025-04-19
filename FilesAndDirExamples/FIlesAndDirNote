@@ -1,0 +1,183 @@
+## Files and Directories
+
+## 🗂️ 1. Files and Directories
+
+- A **file** is a sequence of bytes stored in storage devices (HDD, SSD, etc.).
+
+- A **directory (folder)** is a container for files, organized in a **hierarchical file system**.
+
+- Each file must be uniquely identified using a **file path**.
+
+
+### Key Points:
+
+- **Same file names** can exist in different directories.
+
+- Files are identified by **full path**, not just name.
+
+
+## 📍 2. File Paths
+
+### 📌 Absolute Path:
+
+- Begins from the **root** of the file system.
+
+    - Unix: `/Users/hong/ict582/foo`
+
+    - Windows: `C:\Users\hong\ict582\foo`
+
+- Not portable: breaks if path structure changes.
+
+
+### 📌 Relative Path:
+
+- Relative to the **Current Working Directory (CWD)**.
+
+- More **portable**.
+
+- Organize your program files and resources using **relative paths** for easy portability.
+
+
+## 📁 3. Current Working Directory (CWD)
+
+### Using `os` module:
+
+
+`import os
+`os.getcwd()         # Get current directory
+`os.chdir("newdir")  # Change current directory`
+
+
+## 📄 4. Opening a File
+open(path, mode) — returns a file object
+Common Modes:
+
+| Mode | Purpose                    |
+| ---- | -------------------------- |
+| 'r'  | Read (default)             |
+| 'r+' | Read and write             |
+| 'w'  | Write (truncate or create) |
+| 'w+' | Read and write             |
+| 'a'  | Append                     |
+| 'a+' | Append and read            |
+| 'x'  | Create new file            |
+
+## 📑 5. Text vs Binary Files
+
+### File types:
+
+- **Text file (`t`)** – Contains characters.
+
+- **Binary file (`b`)** – Contains any data (images, videos, etc).
+
+
+### Examples:
+`open("foo.txt", "rt")       # Read text file
+`open("foo.bin", "wb")       # Write binary file
+`open("foo.txt", "a+t")      # Append and read text file
+
+## ✍️ 6. Reading & Writing Text Files
+
+### Methods:
+
+- `read(n)`: Reads `n` characters
+
+- `read()`: Reads whole file
+
+- `readline()`: Reads one line
+
+- `write(str)`: Writes a string ---> it is gonna truncate the file
+
+Example:
+
+`file = open("foo.txt", "r")
+`for line in file:
+ `   print(line, end='')  # here the end='' is ensuring to remove new line at the end of the string
+
+
+
+## 📍 7. File Position (Offset)
+
+### Methods:
+
+- `file.tell()` → Get current file position
+- `file.seek(offset)` → Set file position
+
+`file.seek(0)
+`line = file.readline()`
+
+
+## 📦 8. Buffered I/O
+
+- Python reads/writes via an internal **buffer** to reduce disk I/O.
+
+- Use `file.flush()` to **force a write** to disk immediately.
+
+- Important for real-time logging or frequent updates.
+
+
+## 🔒 9. Closing a File
+
+- Always **close a file** after use to free system resources:
+`file.close()`
+
+### Better approach:
+
+`with open("file.txt", "r") as f:
+	`content = f.read() # Automatically closed after the bloc`
+
+
+## 📊 10. CSV Files
+
+- Popular format for **tabular data** (Comma Separated Values)
+- Use Python's built-in `csv` module
+### Opening CSV:
+
+`import csv
+`file = open("staff.csv", "rt", newline='', encoding='utf-8-sig')`
+
+
+### 📖 Reading CSV Files
+
+#### Using `csv.reader`:
+
+`reader = csv.reader(file)
+`header = next(reader)
+`for row in reader:
+`	print(row[1], row[2])
+
+#### Using `csv.DictReader`:
+
+`reader = csv.DictReader(file)
+`for row in reader:
+`	print(row["Name"], row["Phone"])
+
+
+### ✍️ Writing CSV Files
+
+`with open("newstaff.csv", "w+", newline='', encoding='utf-8-sig') as file:
+	`writer = csv.writer(file)
+	`writer.writerow(["Name", "Phone", "Address"])
+	`writer.writerow(["John", "123456", "Somewhere"])`
+
+
+## 🖥️ 11. Operating System Interaction
+
+### Use `os` and `platform` modules
+
+#### Getting OS info:
+
+`import platform
+`print(platform.system())
+`print(platform.release())
+`print(platform.python_version())
+
+#### Directory operations:
+`os.getcwd()                 # Current dir
+`os.chdir("dir")             # Change dir
+`os.mkdir("new-dir")         # Make directory
+`os.rmdir("new-dir")         # Remove directory
+`os.remove("file.txt")       # Delete file
+`os.rename("a", "b")         # Rename file/dir
+`os.listdir(".")             # List contents
+
