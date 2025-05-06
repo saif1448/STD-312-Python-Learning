@@ -1,0 +1,99 @@
+Functional Programming
+    - It talks about how to do a specific task
+
+OOP
+    - What is going to be used to complete a task
+
+
+For example, Student Course Management System
+
+1. Student------------------> class
+    1. student_id
+    2. student_name
+    3. student_address                      property fields
+    4. student_contact_number
+    5. student_grade
+    6. student_dept --- Deaprtment
+    ------------------------------------
+    1. take_course()
+    2. show_student_description()
+    3. show_student_course_details()     property methods
+    4. remove_course()
+2. Course
+    1. course_id
+    2. course_name
+    3. teacher ---> course_coordinator
+    4. course_duration
+    5. course_credit
+    6. couse_fees
+    -------------------------------------------
+    1. show_course_desc()
+    2. show_course_faculty()
+    3. change_course_faculty()
+    4. show_course_duration()
+    5. set_course_fees()
+    6. show_course_fees()
+3. Department
+    1. dept_id
+    2. dept_name
+    3. teacher ---> head_of_dept
+    --------------------------------------------
+    1. show_dept_details()
+    2. dept_advising()
+    3. change_dept_head()
+4. Teacher
+    1. teacher_id
+    2. teacher_name
+    3. teacher_contact_number
+    4. teacher_add
+    5. Department ---> teacher_dept
+    6. teacher_schedule
+    ------------------------------------------------
+    1. show_teacher_details()
+    2. change_teacher_details()
+    3. set_teacher_schedule()
+    4. show_teacher_schedule()
+
+Type ----> Class
+Student -----> (ABCD, 1231, 1101), (YZYZ, 1232, 1101),
+   Class                Object              Object
+Course ----> (Python, 1101, 4 months, 1.5,..., Mr.XYZ,), (Java, 1102, 4 Months, 1.5, Mr.XYZ)
+  Class                 Object                                      Object
+Teacher ----> (Mr.XYZ, 1919, CSE), (Mr.PQR, 1001, CSE)
+  Class             Object              Object
+Department ----> (0101, CSE, MR.PQR), (0102, EEE, MR.TYR)
+   Class                Object              Object
+
+
+With class ----> we are creating our own data types
+
+The thing we are creating ----> User defined data types
+The thing we can get in built -----> Build in data types
+
+
+Constructor
+    -- It is a special method which creates the object of a class
+    --- Constructor creates an object for the particular class
+
+
+When we give () after the class Name, it indicates the constructor of that given class
+The constructor is a special function which has the same name as the class name
+
+Self ----> it is indicating the current object which you are using
+
+
+to string ----> it returns a string for a given object so that it can be printed with the print()
+
+
+Encapsulation ---> Bunlde the property fields and property methods in a class
+
+Instance variable ----> it is the property fields the class is using
+
+
+OOP Principal ---> OOP Features
+0. Class
+0. Object
+1. Encapsulation
+2. Inheritance
+3. Polymorphism
+4. Abstraction
