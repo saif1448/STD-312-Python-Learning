@@ -36,6 +36,42 @@ def add_student_data():
 
     all_student_data.append(student_data)
 
+
+def search_student_data():
+    choice = int(input('Choose the search option: \n'
+                       '1. Based on Student Number\n'
+                       '2. Based on Student Name\n'))
+    if choice == 1:
+        student_number = int(input('Student Number: '))
+        for student_data in all_student_data:
+            if student_data['ID'] == student_number:
+                print(student_data)
+                break
+            else:
+                print('Student data based on the student number was not found')
+    elif choice == 2:
+        student_name_str = input('Student Name(Full or partial): ')
+        for student_data in all_student_data:
+            if student_name_str in student_data['Name']:
+                print(student_data)
+
+    else:
+        print('Wrong option is choose')
+
+def show_grade_search_student():
+    grade = input('Enter student to list student: ')
+    for student_data in all_student_data:
+        if student_data['Grade'] == grade:
+            print(student_data)
+
+def remove_student_data():
+    global all_student_data
+    student_number = int(input('Student Number: '))
+    for student_data in all_student_data:
+        if student_data['ID'] == student_number:
+            all_student_data.remove(student_data)
+            print(f'Student data removed with the ID {student_data["ID"]}')
+
 while True:
     choice = int(input('Choose one of the following options(1-5)\n'
                        '1. Add Student\n'
@@ -50,11 +86,11 @@ while True:
         except ValueError as e:
             print(f'{e}')
     elif choice == 2:
-        print(all_student_data)
+        search_student_data()
     elif choice == 3:
-        pass
+        show_grade_search_student()
     elif choice == 4:
-        pass
+        remove_student_data()
     elif choice == 5:
         print('You are exiting from the program.')
         break
