@@ -1,5 +1,5 @@
 import csv
-
+import os
 
 all_student_data = []
 
@@ -66,20 +66,25 @@ def add_student_data():
     student_data['UnitMark'] = unitMark
     student_data['Grade'] = letter_grade
 
-    write_std_record_to_file(student_data)
+    # write_std_record_to_file(student_data)
     check_file = check_std_record_on_file(student_number)
-    if check_file:
-        all_student_data.append(student_data)
-    else:
+
+    if not check_file:
         print('Student Record Was not Written on the CSV File!')
         choice = int(input('Choose one of the following:\n '
                            '1. Cancel Operation\n'
-                           '2. Exit Program'))
+                           '2. Continue Operation\n'
+                           '3. Exit Program\n'
+                           ))
         if choice == 1:
             pass
-        else:
+        elif choice == 2:
+            all_student_data.append(student_data)
+        elif choice == 3:
             print('Exiting Program...')
             exit()
+        else:
+            print('Wrong option is chosen! Try again!')
 
 
 
@@ -120,16 +125,15 @@ def remove_student_data():
 
 
 def show_all_student_data():
-    with open(file_name, 'rt', newline='', encoding='utf-8-sig') as csvfile:
-        reader = csv.DictReader(csvfile)  # this function is returning a dictionary
-        count = 1
-        for row in reader:
-            print(f'{count}. ID: {row["ID"]}, Name: {row["Name"]}, Unit Mark: {row["UnitMark"]}, Grade: {row["Grade"]}')
+    count = 1
+    for std in all_student_data:
+        print(f'{count}. {std}')
+        count+=1
+
 
 
 def read_all_student_data():
     global all_student_data
-    global file_name
     with open(file_name, 'rt', newline='', encoding='utf-8-sig') as csvfile:
         reader = csv.DictReader(csvfile)  # this function is returning a dictionary
         count = 1
@@ -142,9 +146,71 @@ def read_all_student_data():
             all_student_data.append(student_data)
             print(f'{count}. ID: {row["ID"]}, Name: {row["Name"]}, Unit Mark: {row["UnitMark"]}, Grade: {row["Grade"]}')
 
+def update_student():
+    global all_student_data
+    student_number = int(input('Student Number: '))
+    is_std_found = False
+    for i, std in enumerate(all_student_data):
+        if student_number == int(std['ID']):
+            is_std_found = True
+            print(f'Current Student with ID:{student_number} is :--> {std}')
+            choice = int(input('Choose one of the following:\n'
+                               '1. Update Student Name\n'
+                               '2. Update Student Mark\n'
+                               '3. Cancel Operation\n'))  # we are performing this task extra
 
-# file_name = input('Enter the student record file name: ')
-file_name = 'all_student_data.csv'
+            if choice == 1:
+                updated_name = input('Enter Updated Name: ')
+                all_student_data[i]['Name'] = updated_name
+            elif choice == 2:
+                updated_mark = int(input('Enter Updated Mark: '))
+                all_student_data[i]['UnitMark'] = updated_mark
+                updated_grade =  calculate_letter_grade(updated_mark)  # if mark is changed, the grade will be changed also.
+                all_student_data[i]['Grade'] = updated_grade
+            elif choice == 3:
+                break
+            else:
+                print("Wrong option is chosen! Try again!")
+            break
+    if not is_std_found:
+        print(f'Student Data Not Found to be updated with ID:{student_number}!')
+
+def write_all_std_data_to_file(write_file_path):
+    with open(write_file_path, 'wt', newline='', encoding='utf-8-sig') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=['ID','Name','UnitMark','Grade'])
+        writer.writeheader()
+        for std in all_student_data:
+            writer.writerow(std)
+
+
+def save_std_data_to_file():
+    save_file_path = input('Enter the file path to save all student data: ')
+
+    current_file_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(current_file_dir, save_file_path)
+
+    if os.path.exists(file_path):
+        print(f'There already a file exists with name {save_file_path}')
+        choice = int(input('Choose one of the following:\n'
+                           '1. Change file name\n'
+                           '2. Overwrite existing file\n'
+                           '3. Cancel Operation\n'))
+        if choice == 1:
+            save_file_path = input('Enter the new file path: ')
+            write_all_std_data_to_file(save_file_path)
+        elif choice == 2:
+            write_all_std_data_to_file(save_file_path)
+        elif choice == 3:
+            pass
+        else:
+            print('Wrong option is chosen! Try again!')
+    else:
+        write_all_std_data_to_file(save_file_path)
+
+
+#must give the correct file name here
+file_name = input('Enter the student record file name: ')
+# file_name = 'all_student_data.csv'
 read_all_student_data()
 
 while True:
@@ -153,8 +219,10 @@ while True:
                        '2. Search Student\n'
                        '3. Show Student List Based on Grade\n'
                        '4. Delete Student\n'
-                       '5. Show All Student List\n'
-                       '6. Exit\n'))
+                       '5. Update Student\n'
+                       '6. Save All Student Data to File\n'
+                       '7. Show All Student List\n'
+                       '8. Exit\n'))
 
     if choice == 1:
         try:
@@ -164,14 +232,18 @@ while True:
         except Exception as e:
             print(f'{e}')
     elif choice == 2:
-        pass
+        search_student_data()
     elif choice == 3:
-        pass
+        show_grade_search_student()
     elif choice == 4:
-        pass
+        remove_student_data()
     elif choice == 5:
-        show_all_student_data()
+        update_student()
     elif choice == 6:
+        save_std_data_to_file()
+    elif choice == 7:
+        show_all_student_data()
+    elif choice == 8:
         print('You are exiting from the program.')
         break
 
