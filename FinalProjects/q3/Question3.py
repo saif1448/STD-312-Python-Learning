@@ -1,5 +1,8 @@
 import csv
 import os
+import operator
+import numpy as np
+import matplotlib.pyplot as plt
 
 all_student_data = []
 
@@ -145,6 +148,7 @@ def read_all_student_data():
             student_data['Grade'] = row['Grade']
             all_student_data.append(student_data)
             print(f'{count}. ID: {row["ID"]}, Name: {row["Name"]}, Unit Mark: {row["UnitMark"]}, Grade: {row["Grade"]}')
+            count+=1
 
 def update_student():
     global all_student_data
@@ -208,9 +212,116 @@ def save_std_data_to_file():
         write_all_std_data_to_file(save_file_path)
 
 
+def show_top_10_perc():
+    # global all_student_data
+    # ascending_std_list = sorted(all_student_data, key=operator.itemgetter('UnitMark'), reverse=True)
+    # total_std = len(ascending_std_list)
+    # cutoff_std_count = max(1, int(total_std*0.10))
+    #
+    # top_10_std_list = ascending_std_list[:cutoff_std_count]
+    # cut_off_mark = top_10_std_list[-1]['UnitMark']
+    #
+    # while cutoff_std_count < total_std and ascending_std_list[cutoff_std_count]['UnitMark'] == cut_off_mark:
+    #     top_10_std_list.append(ascending_std_list[cutoff_std_count])
+    #     cutoff_std_count += 1
+    #
+    # top_10_std_names = [std['Name'] for std in top_10_std_list]
+    # return top_10_std_names
+    all_std_marks = np.array([std['UnitMark'] for std in all_student_data])
+
+    percentile_threshold = np.percentile(all_std_marks, 90)
+
+    top_std_10_names = [std['Name'] for std in all_student_data if std['UnitMark'] >= percentile_threshold]
+
+    return top_std_10_names
+
+
+def show_bottom_10_perc():
+
+    # ascending_std_list = sorted(all_student_data, key=operator.itemgetter('UnitMark'))
+    # total_std = len(ascending_std_list)
+    # cutoff_std_count = max(1, int(total_std * 0.10))
+    #
+    # # Get initial bottom 10% list
+    # bottom_10_std_list = ascending_std_list[:cutoff_std_count]
+    # cut_off_mark = bottom_10_std_list[-1]['UnitMark']
+    #
+    # # Add students with same mark as the last one in the cutoff
+    # while cutoff_std_count < total_std and ascending_std_list[cutoff_std_count]['UnitMark'] == cut_off_mark:
+    #     bottom_10_std_list.append(ascending_std_list[cutoff_std_count])
+    #     cutoff_std_count += 1
+    #
+    # # Extract names
+    # bottom_10_std_names = [std['Name'] for std in bottom_10_std_list]
+    # return bottom_10_std_names
+    all_std_marks = np.array([std['UnitMark'] for std in all_student_data])
+
+    percentile_threshold = np.percentile(all_std_marks, 10)
+
+    bottom_10_std_names = [std['Name'] for std in all_student_data if std['UnitMark'] <= percentile_threshold]
+
+    return bottom_10_std_names
+
+
+def show_mark_bar_chart():
+    all_std_marks = np.array([std['UnitMark'] for std in all_student_data])
+    mark_range = ["0-44", "45-49", "50-59", "60-69", "70-79", "80-89", "90-100"]
+
+    range_count = [
+        np.sum((all_std_marks >= 0) & (all_std_marks <= 44)),
+        np.sum((all_std_marks >= 45) & (all_std_marks <= 49)),
+        np.sum((all_std_marks >= 50) & (all_std_marks <= 59)),
+        np.sum((all_std_marks >= 60) & (all_std_marks <= 69)),
+        np.sum((all_std_marks >= 70) & (all_std_marks <= 79)),
+        np.sum((all_std_marks >= 80) & (all_std_marks <= 89)),
+        np.sum((all_std_marks >= 90) & (all_std_marks <= 100)),
+    ]
+
+    plt.figure(figsize=(10, 6))
+    bars = plt.bar(mark_range, range_count, color='#90EE90', edgecolor='black')
+    for bar in bars:
+        height = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width() / 2, height,  # x, y position
+                 str(height),  # text to show
+                 ha='center', va='bottom')
+    plt.title("Student Marks Distribution by Mark Range")
+    plt.xlabel("Mark Ranges")
+    plt.ylabel("Number of Students")
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()
+    plt.show()
+
+
+def show_grade_pie_chart():
+    grade_list = ['HD', 'D', 'C', 'P', 'N']
+    grade_std_count = [0,0,0,0,0]
+    for std in all_student_data:
+        if std['Grade'] == 'HD':
+            grade_std_count[0] += 1
+        elif std['Grade'] == 'D':
+            grade_std_count[1] += 1
+        elif std['Grade'] == 'C':
+            grade_std_count[2] += 1
+        elif std['Grade'] == 'P':
+            grade_std_count[3] += 1
+        else:
+            grade_std_count[4] += 1
+    total_student = len(all_student_data)
+
+    colors = ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#c2c2f0']
+
+    plt.figure(figsize=(8, 5))
+    plt.pie(x=grade_std_count, labels=grade_list, startangle=90, autopct='%1.0f%%', colors=colors)
+    plt.title('Student Grade Distribution')
+    plt.show()
+
+
+
+
+
 #must give the correct file name here
 file_name = input('Enter the student record file name: ')
-# file_name = 'all_student_data.csv'
+# file_name = 'std_data.csv'
 read_all_student_data()
 
 while True:
@@ -222,7 +333,11 @@ while True:
                        '5. Update Student\n'
                        '6. Save All Student Data to File\n'
                        '7. Show All Student List\n'
-                       '8. Exit\n'))
+                       '8. Show Top 10% Student Names\n'
+                       '9. Show Bottom 10% Student Names\n'
+                       '10. Show Student Marks Bar Chart\n'
+                       '11. Show Student Grade Pie Chart\n'
+                       '12. Exit\n'))
 
     if choice == 1:
         try:
@@ -244,6 +359,26 @@ while True:
     elif choice == 7:
         show_all_student_data()
     elif choice == 8:
+        top_10_names = show_top_10_perc()
+        print("*"*20)
+        print("Top 10% Student Names:")
+        print("-"*20)
+        for i, name in enumerate(top_10_names):
+            print(f'{i+1}. {name}')
+        print("*" * 20)
+    elif choice == 9:
+        print("*" * 20)
+        print("Bottom 10% Student Names:")
+        print("-" * 20)
+        bottom_10_names = show_bottom_10_perc()
+        for i, name in enumerate(bottom_10_names):
+            print(f'{i+1}. {name}')
+        print("*" * 20)
+    elif choice == 10:
+        show_mark_bar_chart()
+    elif choice == 11:
+        show_grade_pie_chart()
+    elif choice == 12:
         print('You are exiting from the program.')
         break
 

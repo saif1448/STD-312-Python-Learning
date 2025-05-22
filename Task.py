@@ -1,36 +1,33 @@
-#
-# l1 = [1001, 60, 65, 55, 59, 'P']
-# l2 = [1002, 80, 75, 68, 72, 'D']
-# l3 = [1003, 45, 50, 52, 50, 'P'] # 1d list
-#
-# student_data = [l1, l2, l3]  # list of list
-#
-# # std_marsk ---> this is list is carrying some 1d list
-# # that is why std_marks is a 2d list
-#
-# # A 2d list is a list of 1d list
-#
-#
-# # 3d ---> A 3d list will be a list of 2d list
-#
-# # 4d ---> a 4d list will be a list of 3d list
-#
-# # nd ---> a nd list will be a list of (n-1)d list
-#
-#
-# # 1002 ---> grade [1][5]
-#
-# # print(std_marks[1][5])
-# # print(std_marks[2][4])
-#
-# # it is gonna print each student grade
-# # std_marks = [l1, l2, l3]
-# #std ---> l1 ---l2 ---- l3
-# # for std in std_marks:
-# #     print(f"{std[0]} ---> {std[4]}")
-# #
-#
-# hd_grade_list = [[val for val in row if True  ]for row in student_data]
-#
-# print(hd_grade_list)
+import matplotlib.pyplot as plt
+import numpy as np
 
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Generate random marks (or load real data)
+np.random.seed(42)
+marks = np.random.randint(0, 101, size=200)  # 200 students, marks from 0 to 100
+
+# 2. Define bracket labels and boundaries
+brackets = ["0-44", "45-49", "50-59", "60-69", "70-79", "80-89", "90-100"]
+counts = [
+    np.sum((marks >= 0) & (marks <= 44)),
+    np.sum((marks >= 45) & (marks <= 49)),
+    np.sum((marks >= 50) & (marks <= 59)),
+    np.sum((marks >= 60) & (marks <= 69)),
+    np.sum((marks >= 70) & (marks <= 79)),
+    np.sum((marks >= 80) & (marks <= 89)),
+    np.sum((marks >= 90) & (marks <= 100)),
+]
+
+# 3. Plot the bar chart
+plt.figure(figsize=(10, 6))
+plt.bar(brackets, counts, color='skyblue', edgecolor='black')
+plt.title("Distribution of Student Marks by Bracket")
+plt.xlabel("Mark Brackets")
+plt.ylabel("Number of Students")
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
+    
