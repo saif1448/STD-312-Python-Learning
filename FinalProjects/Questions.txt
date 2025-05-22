@@ -1,0 +1,41 @@
+
+Question 1 (30%): Simple student management system (Back to Syllabus)
+
+Write a Python program to manage the students enrolled in a sta 4.0 program. You will display a menu that allows the user to perform different operations repeatedly. The menu must include the following items:
+
+add the details of a student to the system, including the student number, the student name, and the unit mark.
+update the information about the student. Students are assigned to a new student number when they promote from one stage to another. The same student must be able to keep the same student name and display the records of the matching students. The same student must be searchable and must allow for a partial match, for example, the search key "john" would be matched by "John Smith" and "Elton John"
+display the records of the students with a given unit grade (HD, D, C, P and F). Use Murdoch University's grade system to convert marks to grades.
+delete a student's record from the system.
+exit from the program.
+You must not use any list for this question.
+
+You should use Python's built-in module 'csv' to handle CSV files.
+
+This program together with the associated files (if any) must be stored under sub-directory a1.
+
+Question 2 (30%): Lead student records from file and saves student records to file (Back to Syllabus)
+
+Revised your solution to Question 1 by adding new features: when the program starts, it first loads the student records from a CSV file. The user provides the name/path of the file from the command line. The CSV file contains the student records. Each record consists of the student number, student name and the unit mark. Make sure that in the CSV file, each student number is unique with no duplicate entries.
+
+In addition, your program should have the following additional functionalities (either new menu items or updates to the mean from Question 1):
+
+update: upon input, update details of a student to the system, the program must ensure to check that there is no clash between the student number and the existing student numbers.
+add: new student records into the system, the program must ensure to check that there is no clash between the student number and the existing student numbers to avoid any data duplication.
+edit: a new student record based on the student number. The user enters the student number, and the program displays the student name and unit mark for the user to change of a matching student is found.
+save: the program automatically saves the student records to a CSV file before exiting the program. The user should not be asked to manually select an option from the menu. Your program should prompt the user to state a file name or path. If the file exists, warn the user and give them the option of either changing the file name, overwriting the file, or canceling the operation.
+As part of the testing process, you should gradually build up a sequence of at least 30 student records and save them in a CSV file. You must include this file in your submission to sub-directory a2. Your test documentation must show how this file is gradually built up in the testing of all menu items.
+
+You should use Python's built-in module 'csv' to handle CSV files.
+
+This program together with the associated files (if any) must be stored under sub-directory a2.
+
+Question 3 (30%): Display grade distribution in charts (Back to Syllabus)
+
+Revised your solution to Question 2 by adding the following additional menu items:
+
+list the names of the top 10% of students
+list the names of the bottom 10% of students
+display a bar chart showing the number of students in each of the following marks teachers: 0-44, 45-49, 50-59, 60-69, 70-79, 80-89 and 90-100. The chart must have a title and meaningful labels for X-axis and Y-axis.
+display a grade distribution in a pie chart. The chart must have a title and labels for the following grades: HD, D, C, P and N. In addition, each label must also show the percentage number. For example, if 20% of students achieved C grade, the label for C grade should be "C - 20%".
+You may use Python's modules 'csv' and 'matplotlib' for this question.

@@ -1,9 +1,52 @@
+"""
+Student Record Management System (Question 2 Implementation)
+
+This program implements a student record management system with file I/O capabilities.
+Key Features:
+1. Load student records from CSV file at startup
+2. Maintain unique student numbers (no duplicates allowed)
+3. Add new student records with validation
+4. Update existing student records
+5. Search students by number or name (partial match supported)
+6. Display students by grade
+7. Delete student records
+8. Save records to CSV with file handling options
+
+File Operations:
+- Input: Reads initial student data from user-specified CSV file
+- Output: Saves to CSV with options to:
+    * Change filename if exists
+    * Overwrite existing file
+    * Cancel operation
+
+Data Structure:
+- Student records stored as dictionaries with fields:
+    * ID: Unique student number (integer)
+    * Name: Student's full name (string)
+    * UnitMark: Numeric mark 0-100 (integer)
+    * Grade: Letter grade HD, D, C, P, F (string)
+
+Required format for CSV files:
+- Headers: ID,Name,UnitMark,Grade
+- Encoding: UTF-8 with BOM
+"""
+
 import csv
 import os
 
 all_student_data = []
 
+
 def calculate_letter_grade(total_mark):
+    """
+    Converts numeric mark to Murdoch University grade letter.
+
+    Parameters:
+        total_mark (int): Student's numeric mark (0-100)
+
+    Returns:
+        str: Letter grade (HD, D, C, P, or F)
+    """
     if total_mark >= 80:
         return 'HD'
     elif total_mark >= 70:
@@ -17,6 +60,15 @@ def calculate_letter_grade(total_mark):
 
 
 def check_duplicate_student_number(student_number):
+    """
+    Validates uniqueness of student numbers.
+
+    Parameters:
+    - student_number (int): Student ID to check
+
+    Returns:
+    - bool: True if duplicate exists, False otherwise
+    """
     for std in all_student_data:
         if std['ID'] == student_number:
             return True
@@ -32,7 +84,8 @@ def write_std_record_to_file(std):
 
 def check_std_record_on_file(student_number):
     with open(file_name, 'rt', newline='', encoding='utf-8-sig') as csvfile:
-        reader = csv.DictReader(csvfile)  # this function is returning a dictionary
+        # this function is returning a dictionary
+        reader = csv.DictReader(csvfile)
         is_present = False
         for row in reader:
             if int(row['ID']) == student_number:
@@ -40,7 +93,24 @@ def check_std_record_on_file(student_number):
                 break
         return is_present
 
+
 def add_student_data():
+    """
+    Adds a new student record with duplicate checking.
+
+    Features:
+    - Validates student number uniqueness
+    - Validates mark range (0-100)
+    - Calculates grade automatically
+    - Handles file write failures with options:
+        1. Cancel operation
+        2. Continue without saving
+        3. Exit program
+
+    Raises:
+        ValueError: If student number <= 0 or mark not in 0-100
+        Exception: If student number already exists
+    """
     global all_student_data
     student_data = {}
     student_number = int(input('Student Number: '))
@@ -57,7 +127,6 @@ def add_student_data():
 
     if not 0 <= unitMark <= 100:
         raise ValueError('Unit Mark must be a positive integer')
-
 
     letter_grade = calculate_letter_grade(unitMark)
 
@@ -87,7 +156,6 @@ def add_student_data():
             print('Wrong option is chosen! Try again!')
 
 
-
 def search_student_data():
     choice = int(input('Choose the search option: \n'
                        '1. Based on Student Number\n'
@@ -109,11 +177,13 @@ def search_student_data():
     else:
         print('Wrong option is choose')
 
+
 def show_grade_search_student():
     grade = input('Enter student to list student: ')
     for student_data in all_student_data:
         if student_data['Grade'] == grade:
             print(student_data)
+
 
 def remove_student_data():
     global all_student_data
@@ -128,14 +198,27 @@ def show_all_student_data():
     count = 1
     for std in all_student_data:
         print(f'{count}. {std}')
-        count+=1
-
+        count += 1
 
 
 def read_all_student_data():
+    """
+    Loads initial student data from CSV file.
+
+    Features:
+    - Reads and validates CSV format
+    - Converts string data to appropriate types
+    - Stores records in memory for program operations
+    - Displays loaded records with running count
+
+    Required CSV format:
+    - Headers: ID,Name,UnitMark,Grade
+    - Encoding: UTF-8 with BOM
+    """
     global all_student_data
     with open(file_name, 'rt', newline='', encoding='utf-8-sig') as csvfile:
-        reader = csv.DictReader(csvfile)  # this function is returning a dictionary
+        # this function is returning a dictionary
+        reader = csv.DictReader(csvfile)
         count = 1
         for row in reader:
             student_data = {}
@@ -144,9 +227,22 @@ def read_all_student_data():
             student_data['UnitMark'] = int(row['UnitMark'])
             student_data['Grade'] = row['Grade']
             all_student_data.append(student_data)
-            print(f'{count}. ID: {row["ID"]}, Name: {row["Name"]}, Unit Mark: {row["UnitMark"]}, Grade: {row["Grade"]}')
+            print(
+                f'{count}. ID: {row["ID"]}, Name: {row["Name"]}, Unit Mark: {row["UnitMark"]}, Grade: {row["Grade"]}')
+
 
 def update_student():
+    """
+    Updates existing student record by ID.
+
+    Features:
+    - Allows updating name or mark separately
+    - Recalculates grade if mark is changed
+    - Validates input mark range
+    - Provides option to cancel operation
+
+    Display: Shows current record before update
+    """
     global all_student_data
     student_number = int(input('Student Number: '))
     is_std_found = False
@@ -165,7 +261,8 @@ def update_student():
             elif choice == 2:
                 updated_mark = int(input('Enter Updated Mark: '))
                 all_student_data[i]['UnitMark'] = updated_mark
-                updated_grade =  calculate_letter_grade(updated_mark)  # if mark is changed, the grade will be changed also.
+                # if mark is changed, the grade will be changed also.
+                updated_grade = calculate_letter_grade(updated_mark)
                 all_student_data[i]['Grade'] = updated_grade
             elif choice == 3:
                 break
@@ -173,17 +270,31 @@ def update_student():
                 print("Wrong option is chosen! Try again!")
             break
     if not is_std_found:
-        print(f'Student Data Not Found to be updated with ID:{student_number}!')
+        print(
+            f'Student Data Not Found to be updated with ID:{student_number}!')
+
 
 def write_all_std_data_to_file(write_file_path):
     with open(write_file_path, 'wt', newline='', encoding='utf-8-sig') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=['ID','Name','UnitMark','Grade'])
+        writer = csv.DictWriter(csvfile, fieldnames=[
+                                'ID', 'Name', 'UnitMark', 'Grade'])
         writer.writeheader()
         for std in all_student_data:
             writer.writerow(std)
 
 
 def save_std_data_to_file():
+    """
+    Saves all student records to CSV file.
+
+    Features:
+    - User specifies output filename/path
+    - Handles existing file conflicts with options:
+        1. Change filename
+        2. Overwrite existing file
+        3. Cancel operation
+    - Preserves all record fields in CSV format
+    """
     save_file_path = input('Enter the file path to save all student data: ')
 
     current_file_dir = os.path.dirname(os.path.abspath(__file__))
@@ -208,7 +319,7 @@ def save_std_data_to_file():
         write_all_std_data_to_file(save_file_path)
 
 
-#must give the correct file name here
+# must give the correct file name here
 file_name = input('Enter the student record file name: ')
 # file_name = 'all_student_data.csv'
 read_all_student_data()
@@ -246,5 +357,3 @@ while True:
     elif choice == 8:
         print('You are exiting from the program.')
         break
-
-

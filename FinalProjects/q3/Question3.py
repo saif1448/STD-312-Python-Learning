@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 
 all_student_data = []
 
+
 def calculate_letter_grade(total_mark):
     if total_mark >= 80:
         return 'HD'
@@ -35,13 +36,15 @@ def write_std_record_to_file(std):
 
 def check_std_record_on_file(student_number):
     with open(file_name, 'rt', newline='', encoding='utf-8-sig') as csvfile:
-        reader = csv.DictReader(csvfile)  # this function is returning a dictionary
+        # this function is returning a dictionary
+        reader = csv.DictReader(csvfile)
         is_present = False
         for row in reader:
             if int(row['ID']) == student_number:
                 is_present = True
                 break
         return is_present
+
 
 def add_student_data():
     global all_student_data
@@ -60,7 +63,6 @@ def add_student_data():
 
     if not 0 <= unitMark <= 100:
         raise ValueError('Unit Mark must be a positive integer')
-
 
     letter_grade = calculate_letter_grade(unitMark)
 
@@ -90,7 +92,6 @@ def add_student_data():
             print('Wrong option is chosen! Try again!')
 
 
-
 def search_student_data():
     choice = int(input('Choose the search option: \n'
                        '1. Based on Student Number\n'
@@ -112,11 +113,13 @@ def search_student_data():
     else:
         print('Wrong option is choose')
 
+
 def show_grade_search_student():
     grade = input('Enter student to list student: ')
     for student_data in all_student_data:
         if student_data['Grade'] == grade:
             print(student_data)
+
 
 def remove_student_data():
     global all_student_data
@@ -131,14 +134,14 @@ def show_all_student_data():
     count = 1
     for std in all_student_data:
         print(f'{count}. {std}')
-        count+=1
-
+        count += 1
 
 
 def read_all_student_data():
     global all_student_data
     with open(file_name, 'rt', newline='', encoding='utf-8-sig') as csvfile:
-        reader = csv.DictReader(csvfile)  # this function is returning a dictionary
+        # this function is returning a dictionary
+        reader = csv.DictReader(csvfile)
         count = 1
         for row in reader:
             student_data = {}
@@ -147,8 +150,10 @@ def read_all_student_data():
             student_data['UnitMark'] = int(row['UnitMark'])
             student_data['Grade'] = row['Grade']
             all_student_data.append(student_data)
-            print(f'{count}. ID: {row["ID"]}, Name: {row["Name"]}, Unit Mark: {row["UnitMark"]}, Grade: {row["Grade"]}')
-            count+=1
+            print(
+                f'{count}. ID: {row["ID"]}, Name: {row["Name"]}, Unit Mark: {row["UnitMark"]}, Grade: {row["Grade"]}')
+            count += 1
+
 
 def update_student():
     global all_student_data
@@ -169,7 +174,8 @@ def update_student():
             elif choice == 2:
                 updated_mark = int(input('Enter Updated Mark: '))
                 all_student_data[i]['UnitMark'] = updated_mark
-                updated_grade =  calculate_letter_grade(updated_mark)  # if mark is changed, the grade will be changed also.
+                # if mark is changed, the grade will be changed also.
+                updated_grade = calculate_letter_grade(updated_mark)
                 all_student_data[i]['Grade'] = updated_grade
             elif choice == 3:
                 break
@@ -177,11 +183,14 @@ def update_student():
                 print("Wrong option is chosen! Try again!")
             break
     if not is_std_found:
-        print(f'Student Data Not Found to be updated with ID:{student_number}!')
+        print(
+            f'Student Data Not Found to be updated with ID:{student_number}!')
+
 
 def write_all_std_data_to_file(write_file_path):
     with open(write_file_path, 'wt', newline='', encoding='utf-8-sig') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=['ID','Name','UnitMark','Grade'])
+        writer = csv.DictWriter(csvfile, fieldnames=[
+                                'ID', 'Name', 'UnitMark', 'Grade'])
         writer.writeheader()
         for std in all_student_data:
             writer.writerow(std)
@@ -213,59 +222,65 @@ def save_std_data_to_file():
 
 
 def show_top_10_perc():
-    # global all_student_data
-    # ascending_std_list = sorted(all_student_data, key=operator.itemgetter('UnitMark'), reverse=True)
-    # total_std = len(ascending_std_list)
-    # cutoff_std_count = max(1, int(total_std*0.10))
-    #
-    # top_10_std_list = ascending_std_list[:cutoff_std_count]
-    # cut_off_mark = top_10_std_list[-1]['UnitMark']
-    #
-    # while cutoff_std_count < total_std and ascending_std_list[cutoff_std_count]['UnitMark'] == cut_off_mark:
-    #     top_10_std_list.append(ascending_std_list[cutoff_std_count])
-    #     cutoff_std_count += 1
-    #
-    # top_10_std_names = [std['Name'] for std in top_10_std_list]
-    # return top_10_std_names
+    """
+    Identifies and returns names of top 10% performing students.
+
+    Implementation:
+    - Uses numpy percentile calculation
+    - Handles ties at the cutoff point
+    - Includes all students at the 90th percentile mark
+
+    Returns:
+        list: Names of students in top 10% by mark
+    """
     all_std_marks = np.array([std['UnitMark'] for std in all_student_data])
 
     percentile_threshold = np.percentile(all_std_marks, 90)
 
-    top_std_10_names = [std['Name'] for std in all_student_data if std['UnitMark'] >= percentile_threshold]
+    top_std_10_names = [std['Name']
+                        for std in all_student_data if std['UnitMark'] >= percentile_threshold]
 
     return top_std_10_names
 
 
 def show_bottom_10_perc():
+    """
+    Identifies and returns names of bottom 10% performing students.
 
-    # ascending_std_list = sorted(all_student_data, key=operator.itemgetter('UnitMark'))
-    # total_std = len(ascending_std_list)
-    # cutoff_std_count = max(1, int(total_std * 0.10))
-    #
-    # # Get initial bottom 10% list
-    # bottom_10_std_list = ascending_std_list[:cutoff_std_count]
-    # cut_off_mark = bottom_10_std_list[-1]['UnitMark']
-    #
-    # # Add students with same mark as the last one in the cutoff
-    # while cutoff_std_count < total_std and ascending_std_list[cutoff_std_count]['UnitMark'] == cut_off_mark:
-    #     bottom_10_std_list.append(ascending_std_list[cutoff_std_count])
-    #     cutoff_std_count += 1
-    #
-    # # Extract names
-    # bottom_10_std_names = [std['Name'] for std in bottom_10_std_list]
-    # return bottom_10_std_names
+    Implementation:
+    - Uses numpy percentile calculation
+    - Handles ties at the cutoff point
+    - Includes all students at the 10th percentile mark
+
+    Returns:
+        list: Names of students in bottom 10% by mark
+    """
     all_std_marks = np.array([std['UnitMark'] for std in all_student_data])
 
     percentile_threshold = np.percentile(all_std_marks, 10)
 
-    bottom_10_std_names = [std['Name'] for std in all_student_data if std['UnitMark'] <= percentile_threshold]
+    bottom_10_std_names = [
+        std['Name'] for std in all_student_data if std['UnitMark'] <= percentile_threshold]
 
     return bottom_10_std_names
 
 
 def show_mark_bar_chart():
+    """
+    Displays bar chart of student mark distribution.
+
+    Features:
+    - Mark ranges: 0-44, 45-49, 50-59, 60-69, 70-79, 80-89, 90-100
+    - Shows count of students in each range
+    - Includes:
+        * Title
+        * Labeled axes
+        * Value labels on bars
+        * Grid lines for readability
+    """
     all_std_marks = np.array([std['UnitMark'] for std in all_student_data])
-    mark_range = ["0-44", "45-49", "50-59", "60-69", "70-79", "80-89", "90-100"]
+    mark_range = ["0-44", "45-49", "50-59",
+                  "60-69", "70-79", "80-89", "90-100"]
 
     range_count = [
         np.sum((all_std_marks >= 0) & (all_std_marks <= 44)),
@@ -293,8 +308,20 @@ def show_mark_bar_chart():
 
 
 def show_grade_pie_chart():
+    """
+    Displays pie chart of grade distribution.
+
+    Features:
+    - Shows distribution of grades (HD, D, C, P, F)
+    - Includes:
+        * Percentage labels
+        * Color coding
+        * Title
+        * Legend
+    - Calculates percentages based on total enrollment
+    """
     grade_list = ['HD', 'D', 'C', 'P', 'N']
-    grade_std_count = [0,0,0,0,0]
+    grade_std_count = [0, 0, 0, 0, 0]
     for std in all_student_data:
         if std['Grade'] == 'HD':
             grade_std_count[0] += 1
@@ -311,15 +338,13 @@ def show_grade_pie_chart():
     colors = ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#c2c2f0']
 
     plt.figure(figsize=(8, 5))
-    plt.pie(x=grade_std_count, labels=grade_list, startangle=90, autopct='%1.0f%%', colors=colors)
+    plt.pie(x=grade_std_count, labels=grade_list,
+            startangle=90, autopct='%1.0f%%', colors=colors)
     plt.title('Student Grade Distribution')
     plt.show()
 
 
-
-
-
-#must give the correct file name here
+# must give the correct file name here
 file_name = input('Enter the student record file name: ')
 # file_name = 'std_data.csv'
 read_all_student_data()
@@ -381,5 +406,3 @@ while True:
     elif choice == 12:
         print('You are exiting from the program.')
         break
-
-

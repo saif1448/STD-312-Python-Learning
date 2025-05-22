@@ -1,7 +1,23 @@
-
 all_student_data = []
 
+
 def calculate_letter_grade(total_mark):
+    """
+    Converts a numeric mark to a letter grade based on Murdoch University's grading system.
+
+    Parameters:
+    - total_mark (int): Student's numeric mark (0-100)
+
+    Returns:
+    - str: Letter grade (HD, D, C, P, or F)
+
+    Grade Boundaries:
+    - HD (High Distinction): >= 80
+    - D (Distinction): 70-79
+    - C (Credit): 60-69
+    - P (Pass): 50-59
+    - F (Fail): < 50
+    """
     if total_mark >= 80:
         return 'HD'
     elif total_mark >= 70:
@@ -13,7 +29,23 @@ def calculate_letter_grade(total_mark):
     else:
         return 'F'
 
+
 def add_student_data():
+    """
+    Adds a new student record to the system.
+
+    Input Requirements:
+    - Student Number (int): Positive integer
+    - Name (str): Student's full name
+    - Unit Mark (int): 0-100
+
+    Validation:
+    - Checks if student number is positive
+    - Validates unit mark range (0-100)
+
+    Throws:
+    - ValueError: If input validation fails
+    """
     global all_student_data
     student_data = {}
     student_number = int(input('Student Number: '))
@@ -26,7 +58,6 @@ def add_student_data():
     if not 0 <= unitMark <= 100:
         raise ValueError('Unit Mark must be a positive integer')
 
-
     letter_grade = calculate_letter_grade(unitMark)
 
     student_data['ID'] = student_number
@@ -38,6 +69,15 @@ def add_student_data():
 
 
 def search_student_data():
+    """
+    Searches for student records using two methods:
+    1. By student number (exact match)
+    2. By name (partial match)
+
+    Features:
+    - Case-sensitive name search
+    - Displays full record if found
+    """
     choice = int(input('Choose the search option: \n'
                        '1. Based on Student Number\n'
                        '2. Based on Student Name\n'))
@@ -58,19 +98,40 @@ def search_student_data():
     else:
         print('Wrong option is choose')
 
+
 def show_grade_search_student():
+    """
+    Lists all students with a specific grade.
+
+    Input:
+    - Grade (str): HD, D, C, P, or F
+
+    Output:
+    - Displays all matching student records
+    """
     grade = input('Enter student to list student: ')
     for student_data in all_student_data:
         if student_data['Grade'] == grade:
             print(student_data)
 
+
 def remove_student_data():
+    """
+    Removes a student record based on student number.
+
+    Input:
+    - Student Number (int)
+
+    Output:
+    - Confirmation message if record is deleted
+    """
     global all_student_data
     student_number = int(input('Student Number: '))
     for student_data in all_student_data:
         if student_data['ID'] == student_number:
             all_student_data.remove(student_data)
             print(f'Student data removed with the ID {student_data["ID"]}')
+
 
 while True:
     choice = int(input('Choose one of the following options(1-5)\n'
@@ -94,5 +155,3 @@ while True:
     elif choice == 5:
         print('You are exiting from the program.')
         break
-
-
