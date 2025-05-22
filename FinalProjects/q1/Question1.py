@@ -92,7 +92,7 @@ def search_student_data():
     elif choice == 2:
         student_name_str = input('Student Name(Full or partial): ')
         for student_data in all_student_data:
-            if student_name_str in student_data['Name']:
+            if student_name_str.lower() in student_data['Name'].lower():
                 print(student_data)
 
     else:
