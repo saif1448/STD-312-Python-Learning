@@ -146,7 +146,7 @@ def add_student_data():
                            '3. Exit Program\n'
                            ))
         if choice == 1:
-            pass
+            print("The student record is not stored. Cancelling operation.")
         elif choice == 2:
             all_student_data.append(student_data)
         elif choice == 3:
@@ -312,7 +312,7 @@ def save_std_data_to_file():
         elif choice == 2:
             write_all_std_data_to_file(save_file_path)
         elif choice == 3:
-            pass
+            print("File operation cancelled!")
         else:
             print('Wrong option is chosen! Try again!')
     else:
@@ -321,7 +321,7 @@ def save_std_data_to_file():
 
 # must give the correct file name here
 file_name = input('Enter the student record file name: ')
-# file_name = 'student_data.csv'
+
 read_all_student_data()
 
 while True:
