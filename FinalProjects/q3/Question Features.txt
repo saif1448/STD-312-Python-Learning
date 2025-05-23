@@ -1,0 +1,47 @@
+Question 1
+1. Search
+	1. based on student number
+	2. based on student name ----> partial string matching
+2. Display student name based on the grade
+3. Delete student record
+4. Quit the program
+
+
+Question 2
+1. Modification from question 1
+2. Read data from CSV file
+3. Features
+	1. When inserting a new student, it must check that the student number is not duplicate
+	2. check wheather the new student is being added to the csv file
+		1. if not release the operation
+		2. or quit the program
+	3. Student Data Modify
+		1. first find the student based on the student number
+		2. then update student name
+		3. or update modify student mark
+	4. Save the student records
+		1. first give a csv file name
+		2. if the file not exist, create a new one and save all student records
+		3. if exists, ask the user either to (i) overwrite, (ii) change the file name (iii) cancel the operation
+	5. For testing
+		1. gradually build 30 student records
+	6. Use python built in csv module
+
+Q3 Requirements
+Modify the solution of Question 2
+1. find top10% students and list out their names
+2. find bottom10% students and list out their names
+3. display a bar chart showing the number of students in each of the following marks brackets:
+	1. 0-44,
+	2. 45-49,
+	3. 50-59,
+	4. 60-69,
+	5. 70-79,
+	6. 80-89
+	7. 90-100.
+	8. The chart must have a title and meaningful labels for X-axis and Y-axis.
+4. display grade distribution in a pie chart.
+	1. The chart must have a title and labels for the following grades:
+		1. HD, D, C, P and N.
+	2. Each label must also show the percentage number.
+		1. For example, if 36% of students achieved C grade, the label for C grade should be "C - 36%".
