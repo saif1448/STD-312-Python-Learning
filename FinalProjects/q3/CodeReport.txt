@@ -1,0 +1,95 @@
+
+1. File will be a zip file
+	1. name format
+		1. last_name_firstname_studentNumber.zip
+2. Inside the zip file
+	1. Assignment.pdf
+	2. create 3 separate folders, named q1, q2, q3
+		1. q1, q2, q3
+			1. coding file
+			2. data files
+3. Assignment.pdf
+	1. Check List
+		•	All details above are complete.
+		•	The zip file contains the file Assignment.pdf. The documentation was prepared according to Documentation Requirements specified in Assignment’s question sheet.
+		•	The zip file includes the code for the three questions. The code for each question is stored under a separate directory named q1, q2 and q3 respectively.
+		•	You understand that the zip file must be submitted to ICT582 Unit LMS.
+		•	You have kept a copy of this assignment, including the zip file.
+	 2. Table of content
+	 3. Documentation of the questions
+		 1. Question Number and Its Title
+		 2. Discussion of your solution
+			 1. What is novel or unusual code I have created
+			 2. Available technical choices and the choice I choose
+			 3. Why I choose the particular choice
+			 4. If the chosen option is solving the solution
+			 5. Highlighting strength and weakness of the solution
+			 6. Pointing out what can be improved
+		3. This discussion should not exceed one page
+		4. Q1
+			1. calculate_letter_grade() ----> It is not mandatory in the requirement but creating this function helps to calculate letter grade easily
+			2. In the add_student_data()
+				1. if the student number is negative a value error is being raised and later the exception is being handled in the main loop
+				2. This exception ensures no student number with invalid choice is accepted
+				3. It also ensures if the the student number is wrong then it won't continue to take further student records
+				4. Same kind of checking is done with student unit mark ---> unit mark is between 0 and 100. Other than this range would raise an value error exception
+			3. In the search_student_data()
+				1. We searched based on student number or student name
+				2. Student name search supports case insensitive search, both full name or partial name
+			4. show_grade_search_student()
+			5. remove_student_data()
+		5. Q2
+			1. add_student_data()  ----> updated 2 things here
+				1. This function is updated
+				2. The addition is it is gonna check duplicate student. If duplicate student, it is gonna show prompt
+				3. to check duplicate this function calls a new function named
+					1. check_duplicate_student_number()
+				4. this function also included
+					1.  Handles file write failures with options:
+						1. check_std_record_on_file() --- it checks if the udpated thing is on the file or not
+						2. Cancel operation
+						3. Continue without saving
+						4. Exit program
+			2. read_all_student_data() ----> this is extra but needed
+				1. it is gonna load all the student record to the student list
+			3. update_student()  ---> new thing added
+				1. it is gonna search student based on student number and it is gonna show the prompt to update unit mark or student name
+				2. I added extra cancel operation ---> it is gonna give the option to do nothing
+			4. save_std_data_to_file() ----> new thing added
+				1. save student data list of dictionary to a csv file
+					1. it is gonna ask the csv file name
+					2. if the csv file name is not present it is gonna create a new csv file and save the data
+					3. if the file is present in the directory it is gonna ask
+						1. rename the file name
+						2. overwrite the file
+						3. cancel operation
+			5. show_all_student_data() ---> it is an extra feature
+				1. It is gonna help to show all the student in the student list
+		6. Q3
+			1. show_top_10_perc()
+				1. we uses numpy to to calculate the threshold number of the top 10 percent number
+				2. then we used this mark to list out the student who has mark greater than or equal this
+			2. show_bottom_10_perc()
+				1. same was as previous, just calculate the bottom 10% using numpy
+			3. show_mark_bar_chart()
+				1. It used numpy to create numpy array of the student mark
+				2. and using this created th bar chart
+			4. sshow_grade_pie_chart()
+				1. we calculated the student number based on their grades
+				2. depending on this , we created the pie chart
+
+	4. Self Diagnosis and Evaluation
+		1. What features have been fully completed and working
+		2. What features have been fully completed but not working
+		3. What features have not been completed or attended
+		4. This section is a must!!!!!
+	5. Test Evidence
+		1. Sufficient test cases
+		2. Test cases must include
+			1. which feature to be tested
+			2. the evidence of the test
+			3. the conclusion of the test
+				1. that proves tested features meets the requirement
+	6. List of file names
+		1. The names of the files of the source code
+		2. Data files name

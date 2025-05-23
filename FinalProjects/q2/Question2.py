@@ -321,7 +321,7 @@ def save_std_data_to_file():
 
 # must give the correct file name here
 file_name = input('Enter the student record file name: ')
-# file_name = 'all_student_data.csv'
+# file_name = 'student_data.csv'
 read_all_student_data()
 
 while True:

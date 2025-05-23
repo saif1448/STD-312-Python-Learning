@@ -299,8 +299,8 @@ def show_mark_bar_chart():
         plt.text(bar.get_x() + bar.get_width() / 2, height,  # x, y position
                  str(height),  # text to show
                  ha='center', va='bottom')
-    plt.title("Student Marks Distribution by Mark Range")
-    plt.xlabel("Mark Ranges")
+    plt.title("Student Marks Distribution by Mark Bracket")
+    plt.xlabel("Mark Brackets")
     plt.ylabel("Number of Students")
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
@@ -333,6 +333,7 @@ def show_grade_pie_chart():
             grade_std_count[3] += 1
         else:
             grade_std_count[4] += 1
+
     total_student = len(all_student_data)
 
     colors = ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99', '#c2c2f0']
