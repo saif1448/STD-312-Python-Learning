@@ -9,6 +9,7 @@ Discussion of your solution
 
 ## Q1
 1. Novel
+
 	1. def calculate_letter_grade(total_mark):
 		1. This function is created to easily calculate the grade depending on student unit mark
 	2. search_student_data()
@@ -24,6 +25,9 @@ Discussion of your solution
 
 ## Q2
 1. Novel
+    0. read_all_student_data() this function is used read the student data from the given file name input by user. If the user gives wrong
+    file name, it will raise and exception FileNotFoundError. That is why we put the associated file reading and student data processing opearation
+    depending on th file in the try catch block. After reading file data, it stores the student data in the all_student_data, which is a list of dictionary
 	1. check_duplicate_student_number() and check_std_record_on_file() functions are the novel work here.
 		1. check_duplicate_student_number() this functions ensures the new student to be added is not carrying a duplicate or already existing student number
 		2. check_std_record_on_file() this function checks if the student to be added is already saved on a file or not. depending on that we may cancel the whole add student operation, exit program or we continue the operation without saving the student data in the file.
