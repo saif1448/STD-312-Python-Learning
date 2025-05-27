@@ -140,7 +140,7 @@ def add_student_data():
 
     if not check_file:
         print('Student Record Was not Written on the CSV File!')
-        choice = int(input('Choose one of the following:\n '
+        choice = int(input('Choose one of the following:\n'
                            '1. Cancel Operation\n'
                            '2. Continue Operation\n'
                            '3. Exit Program\n'
@@ -173,9 +173,14 @@ def search_student_data():
 
     elif choice == 2:
         student_name_str = input('Student Name(Full or partial): ')
+        student_found = False
         for student_data in all_student_data:
             if student_name_str.lower() in student_data['Name'].lower():
                 print(student_data)
+                student_found = True
+
+        if not student_found:
+            print(f'Student was not found with given string {student_name_str}')
 
     else:
         print('Wrong option is choose')

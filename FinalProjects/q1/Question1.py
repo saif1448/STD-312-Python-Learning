@@ -68,32 +68,41 @@ def add_student_data():
     all_student_data.append(student_data)
 
 
+
+
 def search_student_data():
     """
-    Searches for student records using two methods:
-    1. By student number (exact match)
-    2. By name (partial match)
-
-    Features:
-    - Case-sensitive name search
-    - Displays full record if found
-    """
+       Searches for student records using two methods:
+       1. By student number (exact match)
+       2. By name (partial match)
+       Features:
+       - Case-sensitive name search
+       - Displays full record if found
+       """
     choice = int(input('Choose the search option: \n'
                        '1. Based on Student Number\n'
                        '2. Based on Student Name\n'))
     if choice == 1:
         student_number = int(input('Student Number: '))
+        student_found = False
         for student_data in all_student_data:
             if student_data['ID'] == student_number:
+                student_found = True
                 print(student_data)
                 break
-            else:
-                print('Student data based on the student number was not found')
+        if not student_found:
+            print(f'Student data is not found for {student_number}!')
+
     elif choice == 2:
         student_name_str = input('Student Name(Full or partial): ')
+        student_found = False
         for student_data in all_student_data:
             if student_name_str.lower() in student_data['Name'].lower():
                 print(student_data)
+                student_found = True
+
+        if not student_found:
+            print(f'Student was not found with given string {student_name_str}')
 
     else:
         print('Wrong option is choose')

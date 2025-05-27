@@ -109,13 +109,17 @@ def search_student_data():
 
     elif choice == 2:
         student_name_str = input('Student Name(Full or partial): ')
+        student_found = False
         for student_data in all_student_data:
             if student_name_str.lower() in student_data['Name'].lower():
                 print(student_data)
+                student_found = True
+
+        if not student_found:
+            print(f'Student was not found with given string {student_name_str}')
 
     else:
         print('Wrong option is choose')
-
 
 
 def show_grade_search_student():
