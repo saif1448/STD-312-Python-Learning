@@ -1,0 +1,59 @@
+Discussion of your solution
+			 1. What is novel or unusual code I have created
+			 2. Available technical choices and the choice I choose
+			 3. Why I choose the particular choice
+			 4. If the chosen option is solving the solution
+			 5. Highlighting strength and weakness of the solution
+			 6. Pointing out what can be improved
+
+
+## Q1
+1. Novel
+	1. def calculate_letter_grade(total_mark):
+		1. This function is created to easily calculate the grade depending on student unit mark
+	2. search_student_data()
+		1. If no student is found with given student number, it will prompt that the student is not present with that number
+	3. add_student_data()
+		1. it raise value error exception if the student number and unit mark is out of range
+2. Available technical choice (2 and 3)
+	1. calculate_letter_grade() this is created solely for modularity. It segregates the logic of finding the letter grade of student.
+	2. in the add_student_data(), rather than raising errors, we can use conditionals and show the error in print prompts. But here, raising errors removed the extra usage of an conditional
+3. Yes, the chosen options are working fine and giving correct results
+4. 5 6
+	1. The strength of chosen solution improves code readability, code modularity and easy to segregate logic.
+
+## Q2
+1. Novel
+	1. check_duplicate_student_number() and check_std_record_on_file() functions are the novel work here.
+		1. check_duplicate_student_number() this functions ensures the new student to be added is not carrying a duplicate or already existing student number
+		2. check_std_record_on_file() this function checks if the student to be added is already saved on a file or not. depending on that we may cancel the whole add student operation, exit program or we continue the operation without saving the student data in the file.
+	2. update_student() this function is also a novel way to udpate a student name or mark depending on the student record. If the student to be updated with a given student number is not found, it will show  a prompt that the student is not present
+		1. If the student is present, we may udpate the name, or the mark or we can simply cancel the update operation
+	3. write_all_std_data_to_file()
+		1. This function stores all the student data in the all_std_data list. before storing the data to a csv file, its asks for a file name. if the given file is present in the director of the code, it will ask the user to change file name, or overwrite the existing file or simply canceling the save to csv operation
+		2. we used os module to check if the given file name is present in the directory
+2. Available technical choice (2 and 3)
+	1. we can put the code of check_duplicate_student_number() and check_std_record_on_file() functions directly on to the function add_std_data(). but it would reduce modularity. that is why these logics are segregated to their own functions
+	2. we used os module to check if the file is present or not in the directory. we might use a list to store the file name, but it would not be dynamic if the program is closed. that is why we used os module to directly see if the file is present or not
+3. Yes, the chosen options are working fine and giving correct results
+4. 5 6
+	1. The strength of chosen solution improves code readability, code modularity and easy to segregate logic.
+
+
+
+## Q3
+1. Novel (2 and 3)
+	1. show_top_10_perc
+		1. this function is returning the student name who are in the top 10 percentile. we used numpy to first convert all the student unit mark list to a numpy array. from this numpy array we find out the threshold value of unit mark of to 10 percentile. those who have marks greater than or equal to this, their names is shown
+	2. show_bottom_10_perc
+		1. this funciton also used numpy to show bottom 10 percentile student names. it used numpy to first convert the student unit mark to numpy array. from that again we calculated the bottom 10 percent threshold value. those who have equal or less than this, their names are returned.
+	3. show_grade_pie_chart
+			1. this shows the student percentage for each grade for the students. also we used our own color coding in hex value for each of the grades. after configuring these, we have shown the pie chart in a 8 x 5 size window. The title of the pie chart is given as 'Student Grade Distribution'. Also we used the list of grades to show them as label
+	4. show_mark_bar_chart
+		1. this functions shows the bar chart of each of mark brackets provided in the question. first we created a numpy array from the list of student unit marks. then we counted the number of student for each mark brackets. also we stored the mark brackets as string to use them as label later on. Also, we have given our own color in hex value, '#90EE90'. We also shown the counting of each bracket over the bar chart. We gave the x axis label Mark Brackets. We gave the y axis label Number of Students. and the title of the bar chart is Student Marks Distribution by Mark Bracket. then the bar chart is shown in a 10x6 window.
+2. Available technical choice
+	1. for show_top_10_perc and show_bottom_10_perc, we can also use list instead of numpy to calculate the threshold mark. But instead list, we used numpy because it is a lot faster than the regular list. And also, numpy array is later used to show the charts. because of this we used numpy.
+3. Stregnth and weakness
+	1. The code works lot faster. it is modular, highly readable and if any change is required, new functions can be created and added here
+	2. If the code is done using oop, the modularity will be lot neat and easy to maintain. Also the sudent data can be easily stored and shown via the class and objects
+	3.

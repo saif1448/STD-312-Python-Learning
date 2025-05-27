@@ -27,7 +27,7 @@ def calculate_letter_grade(total_mark):
     elif total_mark >= 50:
         return 'P'
     else:
-        return 'F'
+        return 'N'
 
 
 def add_student_data():

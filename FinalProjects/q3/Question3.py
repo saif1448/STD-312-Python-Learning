@@ -17,7 +17,7 @@ def calculate_letter_grade(total_mark):
     elif total_mark >= 50:
         return 'P'
     else:
-        return 'F'
+        return 'N'
 
 
 def check_duplicate_student_number(student_number):
@@ -348,62 +348,66 @@ def show_grade_pie_chart():
 # must give the correct file name here
 file_name = input('Enter the student record file name: ')
 # file_name = 'std_data.csv'
-read_all_student_data()
+try:
+    read_all_student_data()
 
-while True:
-    choice = int(input('Choose one of the following options(1-5)\n'
-                       '1. Add Student\n'
-                       '2. Search Student\n'
-                       '3. Show Student List Based on Grade\n'
-                       '4. Delete Student\n'
-                       '5. Update Student\n'
-                       '6. Save All Student Data to File\n'
-                       '7. Show All Student List\n'
-                       '8. Show Top 10% Student Names\n'
-                       '9. Show Bottom 10% Student Names\n'
-                       '10. Show Student Marks Bar Chart\n'
-                       '11. Show Student Grade Pie Chart\n'
-                       '12. Exit\n'))
+    while True:
+        choice = int(input('Choose one of the following options(1-5)\n'
+                           '1. Add Student\n'
+                           '2. Search Student\n'
+                           '3. Show Student List Based on Grade\n'
+                           '4. Delete Student\n'
+                           '5. Update Student\n'
+                           '6. Save All Student Data to File\n'
+                           '7. Show All Student List\n'
+                           '8. Show Top 10% Student Names\n'
+                           '9. Show Bottom 10% Student Names\n'
+                           '10. Show Student Marks Bar Chart\n'
+                           '11. Show Student Grade Pie Chart\n'
+                           '12. Exit\n'))
 
-    if choice == 1:
-        try:
-            add_student_data()
-        except ValueError as e:
-            print(f'{e}')
-        except Exception as e:
-            print(f'{e}')
-    elif choice == 2:
-        search_student_data()
-    elif choice == 3:
-        show_grade_search_student()
-    elif choice == 4:
-        remove_student_data()
-    elif choice == 5:
-        update_student()
-    elif choice == 6:
-        save_std_data_to_file()
-    elif choice == 7:
-        show_all_student_data()
-    elif choice == 8:
-        top_10_names = show_top_10_perc()
-        print("*"*20)
-        print("Top 10% Student Names:")
-        print("-"*20)
-        for i, name in enumerate(top_10_names):
-            print(f'{i+1}. {name}')
-        print("*" * 20)
-    elif choice == 9:
-        print("*" * 20)
-        print("Bottom 10% Student Names:")
-        print("-" * 20)
-        bottom_10_names = show_bottom_10_perc()
-        for i, name in enumerate(bottom_10_names):
-            print(f'{i+1}. {name}')
-        print("*" * 20)
-    elif choice == 10:
-        show_mark_bar_chart()
-    elif choice == 11:
-        show_grade_pie_chart()
-    elif choice == 12:
-        print('You are exiting from the program.')
-        break
+        if choice == 1:
+            try:
+                add_student_data()
+            except ValueError as e:
+                print(f'{e}')
+            except Exception as e:
+                print(f'{e}')
+        elif choice == 2:
+            search_student_data()
+        elif choice == 3:
+            show_grade_search_student()
+        elif choice == 4:
+            remove_student_data()
+        elif choice == 5:
+            update_student()
+        elif choice == 6:
+            save_std_data_to_file()
+        elif choice == 7:
+            show_all_student_data()
+        elif choice == 8:
+            top_10_names = show_top_10_perc()
+            print("*" * 20)
+            print("Top 10% Student Names:")
+            print("-" * 20)
+            for i, name in enumerate(top_10_names):
+                print(f'{i + 1}. {name}')
+            print("*" * 20)
+        elif choice == 9:
+            print("*" * 20)
+            print("Bottom 10% Student Names:")
+            print("-" * 20)
+            bottom_10_names = show_bottom_10_perc()
+            for i, name in enumerate(bottom_10_names):
+                print(f'{i + 1}. {name}')
+            print("*" * 20)
+        elif choice == 10:
+            show_mark_bar_chart()
+        elif choice == 11:
+            show_grade_pie_chart()
+        elif choice == 12:
+            print('You are exiting from the program.')
+            break
+
+except FileNotFoundError as e:
+    print(e)
