@@ -162,12 +162,15 @@ def search_student_data():
                        '2. Based on Student Name\n'))
     if choice == 1:
         student_number = int(input('Student Number: '))
+        student_found = False
         for student_data in all_student_data:
             if student_data['ID'] == student_number:
+                student_found = True
                 print(student_data)
                 break
-            else:
-                print('Student data based on the student number was not found')
+        if not student_found:
+            print(f'Student data is not found for {student_number}!')
+
     elif choice == 2:
         student_name_str = input('Student Name(Full or partial): ')
         for student_data in all_student_data:
