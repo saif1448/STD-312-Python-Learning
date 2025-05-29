@@ -137,9 +137,9 @@ def add_student_data():
 
     # write_std_record_to_file(student_data)
     check_file = check_std_record_on_file(student_number)
-
+    print('Student Record Was not Written on the CSV File::')
     if not check_file:
-        print('Student Record Was not Written on the CSV File!')
+
         choice = int(input('Choose one of the following:\n'
                            '1. Cancel Operation\n'
                            '2. Continue Operation\n'
