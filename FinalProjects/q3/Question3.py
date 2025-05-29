@@ -75,7 +75,7 @@ def add_student_data():
     check_file = check_std_record_on_file(student_number)
 
     if not check_file:
-        print('Student Record Was not Written on the CSV File!')
+        print('Student Record Was not Written on the CSV File::')
         choice = int(input('Choose one of the following:\n '
                            '1. Cancel Operation\n'
                            '2. Continue Operation\n'
@@ -123,10 +123,23 @@ def search_student_data():
 
 
 def show_grade_search_student():
-    grade = input('Enter student to list student: ')
+    """
+    Lists all students with a specific grade.
+
+    Input:
+    - Grade (str): HD, D, C, P, or N
+
+    Output:
+    - Displays all matching student records
+    """
+    grade = input('Enter Grade Choice(HD, D, C, P, or N) to Filter Students Based on Grade: ')
+    is_found = False
     for student_data in all_student_data:
         if student_data['Grade'] == grade:
+            is_found = True
             print(student_data)
+    if not is_found:
+        print(f'No student is found for {grade}')
 
 
 def remove_student_data():
@@ -205,7 +218,7 @@ def write_all_std_data_to_file(write_file_path):
 
 
 def save_std_data_to_file():
-    save_file_path = input('Enter the file path to save all student data: ')
+    save_file_path = input('Enter the file name to save all student data: ')
 
     current_file_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(current_file_dir, save_file_path)

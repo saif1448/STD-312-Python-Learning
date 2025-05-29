@@ -75,6 +75,7 @@ def search_student_data():
        Searches for student records using two methods:
        1. By student number (exact match)
        2. By name (partial match)
+       2. By name (partial match)
        Features:
        - Case-sensitive name search
        - Displays full record if found
@@ -113,16 +114,19 @@ def show_grade_search_student():
     Lists all students with a specific grade.
 
     Input:
-    - Grade (str): HD, D, C, P, or F
+    - Grade (str): HD, D, C, P, or N
 
     Output:
     - Displays all matching student records
     """
-    grade = input('Enter student to list student: ')
+    grade = input('Enter Grade Choice(HD, D, C, P, or N) to Filter Students Based on Grade: ')
+    is_found = False
     for student_data in all_student_data:
         if student_data['Grade'] == grade:
+            is_found = True
             print(student_data)
-
+    if not is_found:
+        print(f'No student is found for {grade}')
 
 def remove_student_data():
     """
