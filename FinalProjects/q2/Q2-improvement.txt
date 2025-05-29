@@ -1,0 +1,38 @@
+Question 2 Code Review and Improvements
+=====================================
+
+Strengths
+---------
+1. File Operations
+   * Handles file existence checks
+   * Multiple options for file saving (overwrite/rename/cancel)
+   * Proper file closing using 'with' statements
+
+2. Enhanced Features from Q1
+   * Added data persistence through CSV files
+   * Implemented student record modification
+   * Added duplicate student ID checking
+   * Added comprehensive file save options
+
+3. Error Handling
+   * FileNotFoundError handling for missing input files
+   * Duplicate student number checking
+
+4. Code Organization
+   * Clear separation of concerns (file I/O, data manipulation)
+   * Consistent function naming and structure
+
+Weaknesses and Potential Improvements
+----------------------------------
+1. File Path Handling
+   * File path only works for current directory. Other than current file directory, it cannot find the file
+
+Technical Alternative Approaches
+-----------------------------
+1. Object-Oriented Implementation
+
+Recommended Improvements for Implementation
+----------------------------------------
+1. Immediate Enhancements
+   * Add proper path handling using pathlib
+   * Implement proper error messages

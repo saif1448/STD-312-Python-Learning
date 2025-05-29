@@ -1,0 +1,22 @@
+Question 2 Strengths and Weaknesses Analysis
+=========================================
+
+Strengths:
+The Question 2 implementation significantly enhances the basic student management system by introducing robust file
+operations and data persistence. The code demonstrates excellent file handling with proper CSV operations, including
+careful management of file existence checks and UTF-8 encoding. The implementation successfully builds upon Q1 by
+adding crucial features such as data persistence through CSV files, student record modification capabilities, and
+duplicate student ID checking. The file saving system is particularly well-designed, offering users multiple options
+(overwrite/rename/cancel) when dealing with existing files. Error handling is enhanced to include FileNotFoundError
+ handling and duplicate record checking, making the system more robust. The code maintains good separation of
+ concerns between file I/O and data manipulation operations, with consistent function naming and clear structure, making
+  it maintainable and easy to understand.
+
+Weaknesses:
+Despite its improvements, the implementation has several limitations that could affect its robustness and usability.
+The file path handling is restricted to the current directory, limiting the system's flexibility in accessing files from
+different locations. The code still relies on a basic data structure approach rather than leveraging object-oriented
+ programming principles, which could provide better organization and encapsulation. Error handling, while improved,
+ could be more comprehensive, particularly in validating CSV file structure and handling file permission errors.
+ Input validation remains basic, particularly for string inputs like student names and file paths. The implementation
+ could benefit from better progress indicators during file operations and more informative error messages.

@@ -1,0 +1,22 @@
+Question 3 Strengths and Weaknesses Analysis
+=========================================
+
+Strengths:
+The Question 3 implementation excellently extends the student management system with sophisticated data analysis and
+visualization features. The statistical analysis is particularly well-implemented, using numpy for accurate calculation
+of top and bottom 10% performers, with proper handling of percentile calculations and ties at cutoff points.
+The visualization components are professionally implemented using matplotlib, featuring both bar charts for mark
+distribution and pie charts for grade distribution, complete with proper formatting, clear titles, and informative
+labels. The code maintains all the robust features from Q2 including file handling and data management
+while seamlessly integrating the new analytical capabilities. The implementation demonstrates good separation of
+concerns, keeping visualization logic separate from data management, and includes well-documented functions explaining
+ the statistical methodologies used. The user interface is enhanced with new options for viewing different types of
+ analyses and visualizations, making the statistical information easily accessible.
+
+Weaknesses:
+Despite its advanced features, the implementation has several areas that could be enhanced for better functionality and
+ user experience. The visualization system uses basic matplotlib implementations, lacking interactive features that
+ could make the data exploration more dynamic and engaging. The current implementation doesn't provide options to export
+ the generated charts or save analysis results for future
+ reference. The visualization styling is fixed, offering no customization options for users who might need different
+ representations or color schemes.

@@ -1,0 +1,22 @@
+Question 1 Strengths and Weaknesses Analysis
+=========================================
+
+Strengths:
+The Question 1 implementation demonstrates solid foundational programming practices with robust error handling mechanisms,
+particularly in input validation using try-except blocks and proper handling of ValueError exceptions. The code shows
+excellent organization with well-segregated functions, each having a clear single responsibility, making the codebase
+easy to understand and maintain. The implementation features a clear and intuitive menu-driven interface with consistent
+naming conventions throughout the code. The grade calculation system is well-implemented with clear boundary conditions,
+and the search functionality effectively supports both exact (student number) and partial (name) matching, providing good
+user flexibility. The documentation is thorough, with clear docstrings explaining function purposes, parameters, and
+return values.
+
+Weaknesses:
+The primary limitation of the implementation is its reliance on in-memory data storage using a simple list structure,
+resulting in data loss when the program exits. The input validation system is basic, focusing mainly on numeric
+validation while lacking comprehensive validation for string inputs such as student names. The error handling system has gaps,
+particularly in the student removal operation where it doesn't properly handle cases when a student is not found.
+The grade search functionality lacks input validation for grade values, potentially leading to unexpected behavior
+ with invalid inputs. The use of a dictionary-based data structure, while functional, misses the benefits of
+ object-oriented programming, which could provide better data encapsulation and method organization. The system also
+ lacks data persistence features and export capabilities that could make it more practical for real-world use.

@@ -1,0 +1,36 @@
+Question 1 Code Review and Improvements
+=====================================
+
+Strengths
+---------
+1. Error Handling
+   * Proper try-except blocks for input validation
+   * ValueError handling for invalid inputs
+   * Range validation for student number and unit marks
+
+2. Code Organization
+   * Well-segregated functions by responsibility
+   * Clear main program loop
+   * Consistent naming conventions
+
+Weaknesses and Potential Improvements
+----------------------------------
+1. Data Persistence
+   Current: Uses in-memory list (data lost on program exit)
+   Improvements:
+   * Implement file storage (JSON/CSV)
+   * Use SQLite database
+   * Add data export/import features
+
+2. Input Validation
+   Current: Basic numeric validation only
+   Improvements:
+   * Add name validation (empty strings, special characters)
+
+3. Error Handling Gaps
+   * No handling when student not found in remove operation
+   * Missing validation for grade input in show_grade_search_student
+
+Technical Alternative Approaches
+-----------------------------
+Instead of using python dictionary, if object oriented programming was used, it could handle the student data more efficiently.

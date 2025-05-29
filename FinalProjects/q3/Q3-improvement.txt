@@ -1,0 +1,25 @@
+Question 3 Code Review and Improvements
+=====================================
+
+Strengths
+---------
+1. Statistical Analysis
+   * Proper implementation of top/bottom 10% calculations using numpy
+   * Clean handling of percentile calculations
+
+Weaknesses and Potential Improvements
+----------------------------------
+
+Technical Alternative Approaches
+-----------------------------
+
+
+Recommended Improvements
+----------------------
+1. Visualization Enhancements
+   * Implement interactive charts
+
+3. User Experience
+   * Add chart customization options
+
+

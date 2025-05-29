@@ -328,7 +328,7 @@ def save_std_data_to_file():
                            '2. Overwrite existing file\n'
                            '3. Cancel Operation\n'))
         if choice == 1:
-            save_file_path = input('Enter the new file path: ')
+            save_file_path = input('Enter the new file name: ')
             write_all_std_data_to_file(save_file_path)
         elif choice == 2:
             write_all_std_data_to_file(save_file_path)
