@@ -1,6 +1,5 @@
 import csv
 import os
-import operator
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -22,14 +21,14 @@ def calculate_letter_grade(total_mark):
 
 def check_duplicate_student_number(student_number):
     for std in all_student_data:
-        if std['ID'] == student_number:
+        if std['Student_Number'] == student_number:
             return True
     return False
 
 
 def write_std_record_to_file(std):
     with open(file_name, "a", newline='', encoding='utf-8-sig') as csvfile:
-        fieldnames = ['ID', 'Name', 'UnitMark', 'Grade']
+        fieldnames = ['Student_Number', 'Name', 'UnitMark', 'Grade']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writerow(std)
 
@@ -40,7 +39,7 @@ def check_std_record_on_file(student_number):
         reader = csv.DictReader(csvfile)
         is_present = False
         for row in reader:
-            if int(row['ID']) == student_number:
+            if int(row['Student_Number']) == student_number:
                 is_present = True
                 break
         return is_present
@@ -66,7 +65,7 @@ def add_student_data():
 
     letter_grade = calculate_letter_grade(unitMark)
 
-    student_data['ID'] = student_number
+    student_data['Student_Number'] = student_number
     student_data['Name'] = name
     student_data['UnitMark'] = unitMark
     student_data['Grade'] = letter_grade
@@ -100,7 +99,7 @@ def search_student_data():
         student_number = int(input('Student Number: '))
         student_found = False
         for student_data in all_student_data:
-            if student_data['ID'] == student_number:
+            if student_data['Student_Number'] == student_number:
                 student_found = True
                 print(student_data)
                 break
@@ -146,9 +145,9 @@ def remove_student_data():
     global all_student_data
     student_number = int(input('Student Number: '))
     for student_data in all_student_data:
-        if student_data['ID'] == student_number:
+        if student_data['Student_Number'] == student_number:
             all_student_data.remove(student_data)
-            print(f'Student data removed with the ID {student_data["ID"]}')
+            print(f'Student data removed with the Student_Number {student_data["Student_Number"]}')
 
 
 def show_all_student_data():
@@ -166,24 +165,35 @@ def read_all_student_data():
         count = 1
         for row in reader:
             student_data = {}
-            student_data['ID'] = int(row['ID'])
+            student_data['Student_Number'] = int(row['Student_Number'])
             student_data['Name'] = row['Name']
             student_data['UnitMark'] = int(row['UnitMark'])
             student_data['Grade'] = row['Grade']
             all_student_data.append(student_data)
             print(
-                f'{count}. ID: {row["ID"]}, Name: {row["Name"]}, Unit Mark: {row["UnitMark"]}, Grade: {row["Grade"]}')
+                f'{count}. Student_Number: {row["Student_Number"]}, Name: {row["Name"]}, Unit Mark: {row["UnitMark"]}, Grade: {row["Grade"]}')
             count += 1
 
 
 def update_student():
+    """
+    Updates existing student record by Student_Number.
+
+    Features:
+    - Allows updating name or mark separately
+    - Recalculates grade if mark is changed
+    - Validates input mark range
+    - Provides option to cancel operation
+
+    Display: Shows current record before update
+    """
     global all_student_data
     student_number = int(input('Student Number: '))
     is_std_found = False
     for i, std in enumerate(all_student_data):
-        if student_number == int(std['ID']):
+        if student_number == int(std['Student_Number']):
             is_std_found = True
-            print(f'Current Student with ID:{student_number} is :--> {std}')
+            print(f'Current Student with Student_Number:{student_number} is :--> {std}')
             choice = int(input('Choose one of the following:\n'
                                '1. Update Student Name\n'
                                '2. Update Student Mark\n'
@@ -192,26 +202,28 @@ def update_student():
             if choice == 1:
                 updated_name = input('Enter Updated Name: ')
                 all_student_data[i]['Name'] = updated_name
+                print(f"Student Name Update for the student with Student Number:{all_student_data[i]['Student_Number']}")
             elif choice == 2:
                 updated_mark = int(input('Enter Updated Mark: '))
                 all_student_data[i]['UnitMark'] = updated_mark
                 # if mark is changed, the grade will be changed also.
                 updated_grade = calculate_letter_grade(updated_mark)
                 all_student_data[i]['Grade'] = updated_grade
+                print(f"Student Mark Update for the student with Student Number:{all_student_data[i]['Student_Number']}")
             elif choice == 3:
-                break
+                print("Update Operation Cancelled!")
             else:
                 print("Wrong option is chosen! Try again!")
             break
     if not is_std_found:
         print(
-            f'Student Data Not Found to be updated with ID:{student_number}!')
+            f'Student Data Not Found to be updated with Student_Number:{student_number}!')
 
 
 def write_all_std_data_to_file(write_file_path):
     with open(write_file_path, 'wt', newline='', encoding='utf-8-sig') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=[
-                                'ID', 'Name', 'UnitMark', 'Grade'])
+                                'Student_Number', 'Name', 'UnitMark', 'Grade'])
         writer.writeheader()
         for std in all_student_data:
             writer.writerow(std)
@@ -232,8 +244,10 @@ def save_std_data_to_file():
         if choice == 1:
             save_file_path = input('Enter the new file path: ')
             write_all_std_data_to_file(save_file_path)
+            print(f'Student Data has been saved to file with name {save_file_path}.csv')
         elif choice == 2:
             write_all_std_data_to_file(save_file_path)
+            print(f'Student Data has been saved and overwritten to the file with name {save_file_path}.csv')
         elif choice == 3:
             pass
         else:

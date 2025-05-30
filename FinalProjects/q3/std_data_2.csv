@@ -1,4 +1,4 @@
-﻿ID,Name,UnitMark,Grade
+﻿Student_Number,Name,UnitMark,Grade
 1001,Sophia Lee,90,HD
 1002,Liam Walker,67,C
 1003,Ella Green,61,C
@@ -7,12 +7,10 @@
 1006,Logan King,53,P
 1007,Chloe Hill,70,D
 1008,Jacob Adams,68,C
-1009,Mia Baker,55,P
 1010,Noah Murphy,38,F
 1011,Isabella Bell,86,HD
 1012,Lucas Ross,74,D
 1013,Evelyn Cox,63,C
-1014,Ethan Ward,50,P
 1015,Abigail Foster,41,F
 1016,Daniel Price,92,HD
 1017,Harper Gray,79,D

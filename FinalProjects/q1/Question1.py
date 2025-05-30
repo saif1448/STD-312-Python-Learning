@@ -39,12 +39,12 @@ def add_student_data():
     - Name (str): Student's full name
     - Unit Mark (int): 0-100
 
-    Validation:
+    ValStudent_Numberation:
     - Checks if student number is positive
-    - Validates unit mark range (0-100)
+    - ValStudent_Numberates unit mark range (0-100)
 
     Throws:
-    - ValueError: If input validation fails
+    - ValueError: If input valStudent_Numberation fails
     """
     global all_student_data
     student_data = {}
@@ -60,12 +60,14 @@ def add_student_data():
 
     letter_grade = calculate_letter_grade(unitMark)
 
-    student_data['ID'] = student_number
+    student_data['Student_Number'] = student_number
     student_data['Name'] = name
     student_data['UnitMark'] = unitMark
     student_data['Grade'] = letter_grade
 
     all_student_data.append(student_data)
+
+    print(f'Student with Student Number {student_number} is being added.')
 
 
 
@@ -87,7 +89,7 @@ def search_student_data():
         student_number = int(input('Student Number: '))
         student_found = False
         for student_data in all_student_data:
-            if student_data['ID'] == student_number:
+            if student_data['Student_Number'] == student_number:
                 student_found = True
                 print(student_data)
                 break
@@ -141,9 +143,9 @@ def remove_student_data():
     global all_student_data
     student_number = int(input('Student Number: '))
     for student_data in all_student_data:
-        if student_data['ID'] == student_number:
+        if student_data['Student_Number'] == student_number:
             all_student_data.remove(student_data)
-            print(f'Student data removed with the ID {student_data["ID"]}')
+            print(f'Student data removed with the Student_Number {student_data["Student_Number"]}')
 
 
 while True:
