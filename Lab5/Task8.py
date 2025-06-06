@@ -84,4 +84,7 @@ print(f"Highest Mark: {highest_mark}, Lowest Mark: {lowest_mark}, Avg Mark: {avg
 print(f"Failed Student Count: {failed_std_count}")
 print(f"HD Grade List: {hd_grade_list}")
 
-
+# ls = []
+# for std_id, std_grade in student_grades:
+#     if std_grade == 'HD':
+#         ls.append(std_id)

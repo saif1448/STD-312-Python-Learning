@@ -3,7 +3,7 @@ from math import inf
 def lyrics_to_frequencies(word_list):
     word_dict = {}
     for word in word_list:
-        # word = word.lower().replace(',','')
+        word = word.lower().replace(',','')
         word_count = word_dict.get(word, 0)
         word_dict[word] = word_count + 1
     return word_dict

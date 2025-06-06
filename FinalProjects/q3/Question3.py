@@ -406,6 +406,7 @@ try:
                 add_student_data()
             except ValueError as e:
                 print(f'{e}')
+                print('Student Number is not Valid')
             except Exception as e:
                 print(f'{e}')
         elif choice == 2:

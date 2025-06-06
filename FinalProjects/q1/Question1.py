@@ -161,6 +161,7 @@ while True:
             add_student_data()
         except ValueError as e:
             print(f'{e}')
+            print('Student Number is not Valid')
     elif choice == 2:
         search_student_data()
     elif choice == 3:
