@@ -91,3 +91,4 @@ try:
     ticketMachineSystem.getTotalSale()
 except Exception as e:
     print(e)
+
