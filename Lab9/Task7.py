@@ -23,16 +23,19 @@ class TicketMachine:
             print("Not enough money to print the ticket!")
         else:
             print("Ticket is being printed!")
-            self.total += self.price
+            self.total += self.balance
             self.balance = 0
 
     def getTotatlCollected(self ):
         return self.total
 
 
+
 class TicketMachineSystem:
     def __init__(self):
         self.ticketMachines = {}
+        # 1 ---> ticketmachine1
+        # 2 ---> ticketmachine2
 
     def addTicketMachine(self, id, newTicketMachine):
         self.ticketMachines[id] = newTicketMachine
@@ -54,33 +57,37 @@ class TicketMachineSystem:
         print(f'Total Sale: {total_sale}')
 
 
-t1 = TicketMachine(10)
-t2 = TicketMachine(15)
-t3 = TicketMachine(20)
-t4 = TicketMachine(20)
-t5 = TicketMachine(10)
+try:
+    t1 = TicketMachine(10)
+    t2 = TicketMachine(15)
+    t3 = TicketMachine(20)
+    t4 = TicketMachine(20)
+    t5 = TicketMachine(10)
 
-ticketMachineSystem = TicketMachineSystem()
+    ticketMachineSystem = TicketMachineSystem()
 
-ticketMachineSystem.addTicketMachine(1, t1)
-ticketMachineSystem.addTicketMachine(2, t2)
-ticketMachineSystem.addTicketMachine(3, t3)
-ticketMachineSystem.addTicketMachine(4, t4)
-ticketMachineSystem.addTicketMachine(5, t5)
+    ticketMachineSystem.addTicketMachine(1, t1)
+    ticketMachineSystem.addTicketMachine(2, t2)
+    ticketMachineSystem.addTicketMachine(3, t3)
+    ticketMachineSystem.addTicketMachine(4, t4)
+    ticketMachineSystem.addTicketMachine(5, t5)
 
+    ticketMachineSystem.getTotalSale()
 
-ticketMachineSystem.getTotalSale()
+    t1.insertMoney(30)
+    t1.printTicket()
+    t2.insertMoney(30)
+    t2.printTicket()
+    t4.insertMoney(30)
+    t4.printTicket()
+    t5.insertMoney(30)
+    t5.printTicket()
 
-t1.insertMoney(30)
-t1.printTicket()
-t2.insertMoney(30)
-t2.printTicket()
-t4.insertMoney(30)
-t4.printTicket()
-t5.insertMoney(30)
-t5.printTicket()
+    ticketMachineSystem.getTotalSale()
 
+    ticketMachineSystem.showTotalIndividual(3)
 
-ticketMachineSystem.getTotalSale()
-
-ticketMachineSystem.showTotalIndividual(2)
+    ticketMachineSystem.removeTicketMachine(1)
+    ticketMachineSystem.getTotalSale()
+except Exception as e:
+    print(e)

@@ -23,32 +23,32 @@ class TicketMachine:
             print("Not enough money to print the ticket!")
         else:
             print("Ticket is being printed!")
-            self.total += self.price
+            self.total += self.balance
             self.balance = 0
 
-    def getTotatlCollected(self ):
+    def getTotatlCollected(self):
         return self.total
 
+try:
+    ticketMachine = TicketMachine(10)
+    ticketMachine.insertMoney(100)
 
-ticketMachine = TicketMachine(10)
-ticketMachine.insertMoney(100)
+    print(f'Ticket Price: {ticketMachine.getPrice()}')
+    print(f'Balance: {ticketMachine.getBalance()}')
 
-print(f'Ticket Price: {ticketMachine.getPrice()}')
-print(f'Balance: {ticketMachine.getBalance()}')
+    ticketMachine.printTicket()
 
-ticketMachine.printTicket()
+    print(f'Total collected by the machine: {ticketMachine.getTotatlCollected()}')
 
-print(f'Total collected by the machine: {ticketMachine.getTotatlCollected()}')
+    print(f'Ticket Price: {ticketMachine.getPrice()}')
+    print(f'Balance: {ticketMachine.getBalance()}')
 
+    ticketMachine.printTicket()  # for this time, error will occur, as the balance is not sufficient
 
-print(f'Ticket Price: {ticketMachine.getPrice()}')
-print(f'Balance: {ticketMachine.getBalance()}')
+    ticketMachine.insertMoney(40)
+    ticketMachine.printTicket()
 
-ticketMachine.printTicket() # for this time, error will occur, as the balance is not sufficient
-
-ticketMachine.insertMoney(40)
-ticketMachine.printTicket()
-
-
-print(f'Total collected by the machine: {ticketMachine.getTotatlCollected()}')
-print(f'Balance: {ticketMachine.getBalance()}')
+    print(f'Total collected by the machine: {ticketMachine.getTotatlCollected()}')
+    print(f'Balance: {ticketMachine.getBalance()}')
+except Exception as e:
+    print(e)
